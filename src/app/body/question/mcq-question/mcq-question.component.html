@@ -1,0 +1,77 @@
+<form class="container-fluidmy-3 question"  #Form="ngForm">
+  <div class="row pt-2">
+    <div class="col-5">
+      <p class="fw-semibold">
+        question type:<span class="text-primary">{{questionType}}</span>
+      </p>
+    </div>
+    <div class="col-4 text-center">
+      <button class="btn btn-primary mx-1">prefered</button>
+      <button class="btn btn-secondary mx-1">Disqualifier</button>
+    </div>
+    <div class="col-3 text-end">
+      <button class="btn btn-danger" (click)="deleteQuestion($event)">delete</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label class="my-2 fw-semibold" for="staticEmail2">Section Weight</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="weight"
+        #w="ngModel"
+        [(ngModel)]="weight"
+        name="weight"
+        required
+        (change)="addQuestion()"
+        [ngClass]="{ invalid: invalidField && w.invalid }"
+      />
+    </div>
+
+    <div class="col-12 my-3">
+      <input
+        type="text"
+        class="form-control"
+        #name="ngModel"
+        ngModel
+        name="name"
+        required
+        [ngClass]="{ invalid: invalidField && name.invalid }"
+      />
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <input type="checkbox" name="weight" required class="mx-2" />
+        <label class="my-2 fw-semibold" for="staticEmail2">Single choice</label>
+      </div>
+      <div class="col-12 d-flex">
+        <div class="d-flex align-items-center">
+          <span class="fw-semibold">Answer Mode</span>
+        </div>
+        <div class="mx-5">
+          <input type="radio" name="answerMode" checked />
+          <label class="m-2 " for="staticEmail2">Check Box</label>
+        </div>
+        <div class="mx-5">
+          <input type="radio" name="answerMode" />
+          <label class="m-2 " for="staticEmail2"
+            >Radio Buttons</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 ">
+        <p class="w-50 text-danger fw-semibold">Question Choices</p>
+        <input type="text" class="form-control my-2" />
+        <input type="text" class="form-control my-2" />
+      </div>
+      <div class="col-6">
+        <p class="w-50 text-danger fw-semibold">Question Rating</p>
+        <input type="text" placeholder="Weight" class="form-control my-2 w-25" />
+        <input type="text" placeholder="Weight" class="form-control my-2 w-25" />
+      </div>
+    </div>
+  </div>
+</form>

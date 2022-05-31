@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+.question{
+    border: 2px lightgray solid;
+    border-radius: 10px;
+    background-color: lightgray;
+}
+.invalid{
+    border:1px solid red;
+}
+.error{
+        background-color: red;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+}
+a{
+    cursor: pointer;
+}

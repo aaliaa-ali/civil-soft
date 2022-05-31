@@ -1,0 +1,84 @@
+<div class="row border p-4 rounded">
+
+  <form class="row" #myForm="ngForm">
+    <div class="head d-flex justify-content-between">
+      <p>New Node</p>
+      <button class="btn btn-primary" type="submit" (click)="validateWeights()">
+        Save Section
+      </button>
+    </div>
+    <div class="col-6">
+      <label for="name">Section Name</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        name="name"
+        ngModel
+        #name="ngModel"
+        [ngClass]="{ invalid: myForm.submitted && name.invalid }"
+      />
+    </div>
+    <div class="col-6">
+      <label for="staticEmail2">Section Weight</label>
+      <input
+        type="text"
+        class="form-control"
+        id="staticEmail2"
+        #w="ngModel"
+        [(ngModel)]="weight"
+        name="weight"
+        required
+        [ngClass]="{ invalid: myForm.submitted && w.invalid }"
+      />
+    </div>
+
+    <div class="dropdown d-flex border-top mt-3">
+      <button
+        class="btn dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Create New Question
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li
+          class="dropdown-item"
+          *ngFor="let qesType of questionTypes"
+          (click)="createQuestion(qesType)"
+        >
+          <a>{{ qesType }}</a>
+        </li>
+      </ul>
+    </div>
+  </form>
+
+  <app-error-msg
+    *ngIf="(w.invalid || name.invalid || weight == 0) && myForm.submitted"
+    >please enter required fields
+  </app-error-msg>
+  <app-error-msg *ngIf="weightError && weight != null"
+    >weights must equal {{ weight }}
+  </app-error-msg>
+  <app-error-msg *ngIf="selectedQuestion.length == 0 && myForm.submitted"
+    >You Must add one Question at least
+  </app-error-msg>
+  <app-error-msg *ngIf="allValid">exam saved succesfuly </app-error-msg>
+
+  <app-question-esay
+    (childValidation)="validChild($event)"
+    *ngIf="selectedQuestion.includes('Essay Question')"
+    [questionType]="'Essay Question'"
+  ></app-question-esay>
+  <app-mcq-question
+    *ngIf="selectedQuestion.includes('Multiple Choices Question')"
+    [questionType]="'Multiple Choices Question'"
+  ></app-mcq-question>
+  <app-yes-no-question
+    (childValidation)="validChild($event)"
+    *ngIf="selectedQuestion.includes('Yes or NO Question')"
+    [questionType]="'Multiple Choices Question'"
+  ></app-yes-no-question>
+</div>
