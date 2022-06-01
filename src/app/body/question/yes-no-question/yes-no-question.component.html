@@ -1,53 +1,22 @@
-<form class="row my-3 py-2 question" #Form="ngForm">
-  <div class="row pt-2">
-    <div class="col-5">
-      <p class="fw-semibold">
-        question type:<span class="text-primary">{{questionType}}</span>
-      </p>
-    </div>
-    <div class="col-4 text-center">
-      <button class="btn btn-primary mx-1" (click)="answerType = 'prefered'">
-        prefered
-      </button>
-      <button
-        class="btn btn-secondary mx-1"
-        (click)="answerType = 'Disqualifier'"
-      >
-        Disqualifier
-      </button>
-    </div>
-    <div class="col-3 text-end">
-      <button class="btn btn-danger" (click)="deleteQuestion()">delete</button>
-    </div>
+<form class="row mb-3 question py-2" #Form="ngForm">
+  <div class="col-4 text-center d-flex">
+    <button class="btn btn-primary mx-1" (click)="answerType = 'prefered'">
+      prefered
+    </button>
+    <button
+      class="btn btn-secondary mx-1"
+      (click)="answerType = 'Disqualifier'"
+    >
+      Disqualifier
+    </button>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <label class="my-2 fw-semibold">Section Weight</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="weight"
-        #w="ngModel"
-        [(ngModel)]="weight"
-        name="weight"
-        required
-        (change)="addQuestion()"
-        [ngClass]="{ invalid: invalidField && w.invalid }"
-      />
-    </div>
+  <app-question-repeated-part
+    (childValidation)="validateReusablePart($event)"
+    (questionWeight)="calcWeights($event)"
+    [questionType]="questionType"
+  ></app-question-repeated-part>
 
-    <div class="col-12 my-3">
-      <input
-        type="text"
-        class="form-control"
-        #name="ngModel"
-        ngModel
-        name="name"
-        required
-        [ngClass]="{ invalid: invalidField && name.invalid }"
-      />
-    </div>
-  </div>
+  <div class="row"></div>
   <div class="row" *ngIf="answerType == 'prefered'">
     <p for="choices">Question choices</p>
     <div class="col-10 d-flex justify-content-between">
@@ -64,14 +33,14 @@
     <div class="col-10 d-flex justify-content-between">
       <p>a-yes</p>
       <label class="switch">
-        <input type="checkbox" (change)="log(opt1)" />
+        <input type="checkbox" (change)="controlButtons(opt1)" />
         <span class="slider round" #opt1></span>
       </label>
     </div>
     <div class="col-10 d-flex justify-content-between">
       <p>b-No</p>
       <label class="switch">
-        <input type="checkbox" (change)="log(opt2)" />
+        <input type="checkbox" (change)="controlButtons(opt2)" />
         <span class="slider round" #opt2></span>
       </label>
     </div>
@@ -79,4 +48,7 @@
   <app-error-msg *ngIf="selectError"
     >one answer must be prefered and one Disqualifier</app-error-msg
   >
+  <app-error-msg *ngIf="Form.invalid && submited"
+    >please enter required fields
+  </app-error-msg>
 </form>

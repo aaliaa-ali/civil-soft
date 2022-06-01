@@ -1,61 +1,27 @@
-<form class="row my-3 question" #Form="ngForm">
-  <div class="row pt-2">
-    <div class="col-6">
-      <p class="fw-semibold">
-        question type:<span class="text-primary">{{ questionType }}</span>
-      </p>
-    </div>
-    <div class="col-6 text-end">
-      <button class="btn btn-danger" (click)="deleteQuestion($event)">
-        delete
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6">
-      <label class="my-2 fw-semibold" for="staticEmail2">Section Weight</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="weight"
-        #w="ngModel"
-        [(ngModel)]="weight"
-        name="weight"
-        required
-        (change)="addQuestion()"
-        [ngClass]="{ invalid: submited && w.invalid }"
-      />
-    </div>
+<form class="row my-3 question py-2" #Form="ngForm">
+  <app-question-repeated-part
+    (childValidation)="validateReusablePart($event)"
+    (questionWeight)="calcWeights($event)"
 
-    <div class="col-6">
-      <label class="my-2 fw-semibold" for="staticEmail2"
-        >Max Allowed CHaracters</label
-      >
-      <input
-        type="number"
-        class="form-control"
-        placeholder="1000"
-        name="chars"
-        ngModel
-        #chars="ngModel"
-        required
-        [ngClass]="{ invalid: submited && chars.invalid }"
-      />
-    </div>
+    [questionType]="questionType"
+  ></app-question-repeated-part>
 
-    <div class="col-12 my-3">
-      <input
-        type="text"
-        class="form-control"
-        #name="ngModel"
-        ngModel
-        name="name"
-        required
-        [ngClass]="{ invalid: submited && name.invalid }"
-      />
-    </div>
+  <div class="col-6">
+    <label class="my-2 fw-semibold" for="staticEmail2"
+      >Max Allowed CHaracters</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      placeholder="1000"
+      name="chars"
+      ngModel
+      #chars="ngModel"
+      required
+      [ngClass]="{ invalid: submited && chars.invalid }"
+    />
   </div>
-  <app-error-msg *ngIf="Form.invalid && submited"
+  <app-error-msg *ngIf="(Form.invalid ||!reusablePartValidation) && submited "
     >please enter required fields
   </app-error-msg>
 </form>

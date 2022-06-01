@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { QuestionService } from '../../question.service';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-question-esay',
@@ -16,10 +16,9 @@ import { QuestionService } from '../../question.service';
   styleUrls: ['./essay-question.component.scss'],
 })
 export class QuestionEsayComponent implements OnInit {
-  QuestionType: string = 'Essay Question';
-  weight!: any;
-  invalidField: boolean = false;
+  reusablePartValidation!: boolean;
   submited: boolean = false;
+  weight!:any
   @Input() questionType!: string;
   @ViewChild('Form') Form!: NgForm;
   @Output() childValidation = new EventEmitter<boolean>();
@@ -29,15 +28,18 @@ export class QuestionEsayComponent implements OnInit {
   ngOnInit(): void {
     this.QuestionService.submitQuestions.subscribe(() => {
       this.submited = true;
-      this.childValidation.emit(this.Form.valid || false);
-      console.log(this.Form.invalid);
     });
   }
-  addQuestion() {
-    this.QuestionService.essayWeight = +this.weight;
+  validateReusablePart(event: any) {
+    console.log(event);
+    this.reusablePartValidation = event;
+    if (event) {
+      this.childValidation.emit(this.Form.valid || false);
+    } else {
+      this.childValidation.emit(false);
+    }
   }
-  deleteQuestion(event: any) {
-    this.QuestionService.essayWeight = 0;
-    this.QuestionService.deleteQuestion(this.questionType);
+  calcWeights(event: any){
+    this.QuestionService.addWeights(event)
   }
 }

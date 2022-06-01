@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { McqQuestionComponent } from './body/question/mcq-question/mcq-question.component';
 import { YesNoQuestionComponent } from './body/question/yes-no-question/yes-no-question.component';
 import { ErrorMsgComponent } from './body/question/error-msg/error-msg.component';
+import { QuestionRepeatedPartComponent } from './body/question/question-repeated-part/question-repeated-part.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ErrorMsgComponent } from './body/question/error-msg/error-msg.component
     McqQuestionComponent,
     YesNoQuestionComponent,
     ErrorMsgComponent,
+    QuestionRepeatedPartComponent,
   ],
   imports: [
     BrowserModule,
