@@ -19,12 +19,12 @@
       [(ngModel)]="weight"
       name="weight"
       required
-      (change)="addQuestion()"
+      (keyup)="addQuestion()"
       [ngClass]="{ invalid: submited && w.invalid }"
     />
   </div>
 
-  <div class="col-12 my-3">
+  <div class="col-12 my-3 quest-body">
     <input
       type="text"
       class="form-control"
@@ -32,7 +32,11 @@
       ngModel
       name="name"
       required
+      (keyup)="patternTest(name.value)"
       [ngClass]="{ invalid: submited && name.invalid }"
     />
+    <span [ngClass]="inputType =='english'?'english':'arabic'"  class="patch">en</span>
+
+    <span class="patch">ar</span>
   </div>
 </form>

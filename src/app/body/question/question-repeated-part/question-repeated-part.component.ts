@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -15,11 +16,14 @@ import { QuestionService } from '../question.service';
   styleUrls: ['./question-repeated-part.component.scss'],
 })
 export class QuestionRepeatedPartComponent implements OnInit {
+  inputType: string = 'english';
   weight!: any;
   allweight!: any;
   submited: boolean = false;
   @Input() questionType!: string;
   @ViewChild('form') form!: NgForm;
+  @ViewChild('body') body!: ElementRef;
+
   @Output() childValidation = new EventEmitter<boolean>();
   @Output() questionWeight = new EventEmitter<boolean>();
 
@@ -28,7 +32,6 @@ export class QuestionRepeatedPartComponent implements OnInit {
   ngOnInit(): void {
     this.QuestionService.submitQuestions.subscribe(() => {
       this.allweight.push(this.weight);
-      console.log(this.allweight);
       this.submited = true;
       if (this.form.valid) {
         this.childValidation.emit(true);
@@ -43,7 +46,17 @@ export class QuestionRepeatedPartComponent implements OnInit {
     this.QuestionService.calcQuestionWeight.next(this.weight);
   }
   deleteQuestion(event: any) {
-    // this.QuestionService.essayWeight = 0;
     this.QuestionService.deleteQuestion(this.questionType);
+  }
+  patternTest(value: any) {
+    let rjex = new RegExp('[A-Za-z0-9]');
+    let aRrjex = new RegExp('[ء-ي]+');
+
+    if (value.match(rjex)) {
+      this.inputType = 'english';
+    }
+    else if (value.match(aRrjex)) {
+      this.inputType = 'arabic';
+    }
   }
 }

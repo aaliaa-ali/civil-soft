@@ -30,16 +30,14 @@ export class QuestionComponent implements OnInit {
   }
 
   validateWeights() {
-    // this.QuestionService.SumWeights();
-    // console.log(this.QuestionService.totalWeights);
-    // if (this.QuestionService.totalWeights != this.weight) {
-    //   this.weightError = true;
-    // } else {
-    //   this.weightError = false;
-    // }
-    this.QuestionService.questionWeight = [];
-
     this.QuestionService.submitQuestions.next(true);
+
+    if (this.QuestionService.weightsSum != this.weight) {
+      this.weightError = true;
+    } else {
+      this.weightError = false;
+    }
+    this.QuestionService.questionsWeight = [];
   }
   validChild(event: any) {
     let values = [];

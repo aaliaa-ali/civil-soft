@@ -64,7 +64,7 @@
   <app-error-msg *ngIf="selectedQuestion.length == 0 && mainForm.submitted"
     >You Must add one Question at least
   </app-error-msg>
-  <app-error-msg *ngIf="allValid">exam saved succesfuly </app-error-msg>
+  <div class="success" *ngIf="allValid">exam saved succesfuly </div>
 
   <app-question-esay
     (childValidation)="validChild($event)"

@@ -1,19 +1,22 @@
 
-header{
-    background-color: rgb(3, 3, 55);
+@import '../../assets/scss/variable';
+
+.sec1 {
+  background-color: rgb(3, 3, 55);
+  color: white;
+  .logo {
+    width: 100px;
+  }
+  img {
+    width: 60px;
+  }
+  .btn {
     color: white;
-    .logo{
-        width: 100px;
-    }
-    img{
-        width: 60px;
-     }
-     .btn{
-        color: white;
-    }
+  }
 }
 
-.title{
-    background-color: red;
-    border-bottom: 5px solid green;
+.title {
+  background-color: red;
+  border-bottom: 5px solid green;
 }
+

@@ -7,14 +7,18 @@ import { Subject } from 'rxjs';
 export class QuestionService {
   allQuestion: Array<string> = [];
   selectedQuestion: Subject<Array<string>> = new Subject();
-  questionsWeights: Array<any> = [];
   submitQuestions: Subject<boolean> = new Subject();
+  weightsSum!:number
 
-  questionWeight: Array<number> = [];
+  questionsWeight: Array<number> = [];
   calcQuestionWeight: Subject<Array<number>> = new Subject();
   constructor() {}
   addWeights(weight: any) {
-    this.questionWeight.push(weight);
+    this.questionsWeight.push(weight);
+    const add = (arr:Array<number>) => arr.reduce((a, b) => +a + +b, 0);
+    var sum = add(this.questionsWeight);
+    this.weightsSum=sum
+
   }
   deleteQuestion(question: any) {
     this.allQuestion.splice(

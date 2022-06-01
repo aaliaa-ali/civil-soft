@@ -1,0 +1,29 @@
+$primary:hsl(136, 65%, 51%);
+$secondary:hsl(192, 70%, 51%);
+
+//text  colors
+$light-gray-text:hsl(233, 8%, 62%);
+$Dark-Blue-text:hsl(233, 26%, 24%);
+
+//background colors
+$light-gray-blue-background:hsl(220, 16%, 96%);
+$very-light-gray-background:hsl(0,0%,98%);
+$gray-blue-background:hsl(233, 8%, 62%);
+$white:hsl(0, 0%, 100%);
+
+// font size
+$base-font-size:18px;
+
+
+//font familt
+$base-font-family:'Public Sans';
+
+$title-font-weight:400;
+
+$GrayishBlue: hsl(233, 8%, 62%);
+$LightGrayishBlue:hsl(220, 16%, 96%);
+$VeryLightGray:hsl(0,0%,98%);
+$White:hsl(0,0%,100%);
+
+
+$base-linear-gradient:linear-gradient(to right, hsl(136, 65%, 51%) 0%, hsl(192, 70%, 51%)100%);

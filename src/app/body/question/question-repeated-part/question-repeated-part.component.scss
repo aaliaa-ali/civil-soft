@@ -1,0 +1,28 @@
+.patch {
+  position: absolute;
+  top: -25px;
+  border: 1px solid gray;
+  background-color: gray;
+  border-radius: 5px;
+
+}
+.quest-body {
+  position: relative;
+}
+.patch {
+  &:last-child {
+    @extend .patch;
+    right: 50px;
+  }
+  &:nth-child(2) {
+    @extend .patch;
+    right: 75px;
+  }
+}
+.english{
+    background-color: lightblue !important;
+}
+.arabic{
+    background-color: lightcoral !important;
+
+}
