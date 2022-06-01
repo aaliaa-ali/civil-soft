@@ -31,7 +31,6 @@ export class QuestionComponent implements OnInit {
 
   validateWeights() {
     this.QuestionService.submitQuestions.next(true);
-
     if (this.QuestionService.weightsSum != this.weight) {
       this.weightError = true;
     } else {
@@ -44,8 +43,11 @@ export class QuestionComponent implements OnInit {
     values.push(event);
     if (!values.includes(false) && !this.weightError && this.mainForm.valid) {
       this.allValid = true;
+
+      console.log(event);
     } else this.allValid = false;
-    console.log(event);
+    
+    console.log(values);
   }
 
   createQuestion(qesType: string) {
